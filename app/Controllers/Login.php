@@ -1,10 +1,15 @@
 <?php namespace App\Controllers;
 
-class Home extends BaseController
+class Login extends BaseController
 {
 	public function index()
 	{
-		return view('home/index');
+		return view('login/index');
+    }
+    
+    public function cadastro()
+	{
+		return view('login/cadastro');
 	}
 
 	//--------------------------------------------------------------------
