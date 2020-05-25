@@ -2,7 +2,7 @@
 <html>
 	<head>
     <meta charset="utf-8" />
-		<title>Chamados</title>
+		<title><?= $titulo ?></title>
         <?php echo view('template/header') ?>
 
 </head>
@@ -17,9 +17,11 @@
             <h1 class="display-4 text-center">Lista de Chamados</h1><br>
             <div class="alert alert-success d-none mb-0" role="alert">0</div>
         </div>
-      </div>
+      </div>  
 
-      <form action="" method="POST">
+      <?php my_custom_errors() ?>
+
+      <form action="chamados" method="GET">
         
         <div class="form-row">
           <div class="col-12 col-md-6 mb-2">
@@ -30,10 +32,10 @@
             <label for="" class="">Status</label>
             <select name="txtStatus" class="form-control form-control-lg">
               <option value=""></option>
-              <option value="Pendente">Pendente</option>
-              <option value="Aguardando">Aguardando</option>
-              <option value="Resolvido">Resolvido</option>
-              <option value="Cancelado">Cancelado</option>
+              <option value="Pending">Pendente</option>
+              <option value="Waiting">Aguardando</option>
+              <option value="Solved">Resolvido</option>
+              <option value="Canceled">Cancelado</option>
             </select>
           </div>
         </div>
@@ -53,21 +55,23 @@
 			  <th scope="col">#</th>
 			  <th scope="col">Título</th>
 			  <th scope="col">Data</th>
-			  <th scope="col">Satus</th>
-			  <th scope="col">Ações</th>
+			  <th scope="col">Status</th>
+			  <th scope="col" class="text-center">Ações</th>
 			</tr>
 		  </thead>
 		  <tbody>
+        <?php foreach($chamados as $chamado): ?>
 			<tr>
-			  <th scope="row">1</th>
-			  <td>Mark</td>
-			  <td>Otto</td>
-			  <td><span class="badge badge-warning w-100">Pendente</span></td>
+			  <th scope="row"><?= $chamado->id ?></th>
+			  <td><?= $chamado->title ?></td>
+			  <td><?= date('d/m/Y H:i:s', strtotime($chamado->created)) ?></td>
+			  <td><?= labelStatus($chamado->status) ?></td>
 			  <td class="text-right">
-				<a href="<?php echo base_url('chamados/responder/1')?>" class="btn btn-success">Responder</a>
-				<a href="<?php echo base_url('chamados/excluir/1')?>" class="btn btn-danger">Excluir</a>
+				<a href="<?php echo base_url('chamados/responder/'.$chamado->id)?>" class="btn btn-success">Responder</a>
+				<a href="<?php echo base_url('chamados/excluir/'.$chamado->id)?>" class="btn btn-danger">Excluir</a>
 			  </td>
-			</tr>
+      </tr>
+        <?php endforeach; ?>
 		  </tbody>
 		</table>
       

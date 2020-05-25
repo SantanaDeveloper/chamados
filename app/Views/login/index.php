@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title><?= $titulo ?></title>
     <?php echo view('template/header') ?>
 </head>
 
@@ -20,7 +20,9 @@
                     </div>
                 </div>
 
-                <form action="index.html" method="POST">
+                <?php my_custom_errors() ?>
+
+                <form action="<?php echo base_url('login/loginAcao') ?>" method="POST">
 
                     <div class="form-row">
                         <div class="col-12 mb-2">

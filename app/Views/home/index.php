@@ -20,7 +20,9 @@
                     </div>
                 </div>
 
-                <form action="" method="POST">
+                <?php my_custom_errors() ?>
+
+                <form action="<?php echo base_url('home/cadastroAcao') ?>" method="POST">
 
                     <div class="form-row">
                         <div class="col-12 mb-2">

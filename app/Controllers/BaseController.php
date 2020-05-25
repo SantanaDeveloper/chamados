@@ -40,7 +40,16 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		// $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
+		$this->db = \Config\Database::connect();
+
+		//Validação de usuário logado.
+		if ($this->request->uri->getSegment(1) != 'login') {
+			if(!$this->session->has('logged_in')){
+				header('Location:' . base_url('login/index'));
+				exit;
+			}
+		}
 	}
 
 }
